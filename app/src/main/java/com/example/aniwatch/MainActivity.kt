@@ -30,5 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         binding.webView.goBack()
+
     }
 }
