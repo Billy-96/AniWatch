@@ -2,24 +2,33 @@ package com.example.aniwatch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.webkit.WebViewClient
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.aniwatch.databinding.ActivityMainBinding
+import com.example.aniwatch.databinding.LandscapeBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
-        setupActionBarWithNavController(navController)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        anime()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+    fun anime() {
+        binding.apply {
+            webView.webViewClient = WebViewClient()
+            webView.loadUrl("https://animego.org")
+        }
+    }
 
-        val navController = findNavController(R.id.fragmentContainerView)
-        return navController.navigateUp() ||super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        binding.webView.goBack()
     }
 }

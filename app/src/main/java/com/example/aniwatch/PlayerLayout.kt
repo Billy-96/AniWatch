@@ -1,6 +1,9 @@
 package com.example.aniwatch
 
+import android.Manifest
+import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -10,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,7 +29,7 @@ class PlayerLayout : Fragment() {
     private var isPlaying = true
     private lateinit var viewModel: CommonVM
 
-    private val MEDIA_PATH = Environment.getExternalStorageDirectory().path + "/Internal storage/DClM/Camera/314ebc9b846acc6534519231c9572db7.mp4"
+    private val MEDIA_PATH = Environment.getExternalStorageDirectory().path + "/Telegram/Telegram Video/2_5190834041573609550.mp4"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,11 +44,16 @@ class PlayerLayout : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var permissions = mutableListOf<String>()
+        permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        ActivityCompat.requestPermissions(MainActivity(), permissions.toTypedArray(), PackageManager.PERMISSION_GRANTED)
         val uriPath = "https://api.anilibria.tv/v2/getTitle?id=8500/videos/ts/8500/0001/playlist.m3u8"
         val uri = Uri.parse(uriPath)
-        binding.videoView.setVideoURI(uri)
-        binding.videoView.requestFocus()
-        playersActivity()
+        binding.videoView.setVideoPath(MEDIA_PATH)
+        binding.videoView.start()
+//        playersActivity()
 //        viewModel = ViewModelProvider(this).get(CommonVM::class.java)
 //         val ListVideos:MutableList<Videos>
 //        viewModel.liveDataAnimes.observe(viewLifecycleOwner, {
