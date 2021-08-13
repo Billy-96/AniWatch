@@ -3,24 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/playerLayout">
-
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/playerLayout"
-        android:name="com.example.aniwatch.PlayerLayout"
-        android:label="fragment_player_layout"
-        tools:layout="@layout/fragment_player_layout" >
+        android:id="@+id/homeFragment"
+        android:name="com.example.aniwatch.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_playerLayout_to_lansdcapeFragment"
-            app:destination="@id/lansdcapeFragment" />
+            android:id="@+id/action_homeFragment_to_animeListFragment"
+            app:destination="@id/animeListFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mangaListFragment"
+            app:destination="@id/mangaListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/lansdcapeFragment"
-        android:name="com.example.aniwatch.LansdcapeFragment"
-        android:label="landscape"
-        tools:layout="@layout/landscape" >
+        android:id="@+id/animeListFragment"
+        android:name="com.example.aniwatch.AnimeListFragment"
+        android:label="fragment_anime_list"
+        tools:layout="@layout/fragment_anime_list" >
         <action
-            android:id="@+id/action_lansdcapeFragment_to_playerLayout"
-            app:destination="@id/playerLayout" />
+            android:id="@+id/action_animeListFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_animeListFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mangaListFragment"
+        android:name="com.example.aniwatch.MangaListFragment"
+        android:label="fragment_manga_list"
+        tools:layout="@layout/fragment_manga_list" >
+        <action
+            android:id="@+id/action_mangaListFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_mangaListFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.aniwatch.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" />
 </navigation>
