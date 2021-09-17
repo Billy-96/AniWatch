@@ -2,7 +2,6 @@ package com.example.aniwatch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.webkit.WebViewClient
 import androidx.navigation.fragment.NavHostFragment
 import com.example.aniwatch.databinding.ActivityMainBinding
 
@@ -14,5 +13,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        this.supportActionBar?.hide()
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
     }
 }
